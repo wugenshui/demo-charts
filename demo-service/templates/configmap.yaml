@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: demo-service
 data:
-  SERVER_PORT: {{ .Values.SERVER_PORT }}
+  SERVER_PORT: {{ quote .Values.SERVER_PORT }}
