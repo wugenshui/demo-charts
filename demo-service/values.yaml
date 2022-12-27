@@ -1,7 +1,7 @@
 ﻿image:
   repository: cicd-project-generator
   pullPolicy: IfNotPresent
-  tag: ""
+  tag: "latest"
 
 imagePullSecrets: []
 
