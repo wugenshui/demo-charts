@@ -1,0 +1,8 @@
+﻿image:
+  repository: cicd-project-generator
+  pullPolicy: IfNotPresent
+  tag: ""
+
+imagePullSecrets: []
+
+SERVER_PORT: 8080
