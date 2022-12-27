@@ -1,5 +1,5 @@
 ﻿image:
-  repository: cicd-project-generator
+  repository: wugenshui/cicd-project-generator
   pullPolicy: IfNotPresent
   tag: "latest"
 
