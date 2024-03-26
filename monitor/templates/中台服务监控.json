@@ -1231,8 +1231,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "自定义-中台服务监控",
+  "title": "中台服务监控",
   "uid": "bc3b36ad-e464-46b6-9d7f-e30282b145f8",
-  "version": 41,
+  "version": 1,
   "weekStart": ""
 }
