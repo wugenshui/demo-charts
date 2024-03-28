@@ -4,15 +4,15 @@ metadata:
   name: node-exporter
   namespace: monitor
   labels:
-    name: node-exporter
+    app: node-exporter
 spec:
   selector:
     matchLabels:
-     name: node-exporter
+     app: node-exporter
   template:
     metadata:
       labels:
-        name: node-exporter
+        app: node-exporter
     spec:
       hostPID: true
       hostIPC: true

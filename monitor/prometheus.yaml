@@ -82,7 +82,12 @@ data:
         target_label: kubernetes_namespace
       - source_labels: [__meta_kubernetes_service_name]
         action: replace
-        target_label: kubernetes_name  
+        target_label: kubernetes_name
+      - job_name: "k8s"
+        # metrics_path defaults to '/metrics'
+        # scheme defaults to 'http'.
+        static_configs:
+          - targets: ["k8s-master:9100"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -96,12 +101,10 @@ spec:
   selector:
     matchLabels:
       app: prometheus
-      component: server
   template:
     metadata:
       labels:
         app: prometheus
-        component: server
       annotations:
         prometheus.io/scrape: 'false'
     spec:
@@ -136,17 +139,16 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: prometheus-svc
+  name: prometheus
   namespace: monitor
   labels:
     app: prometheus
 spec:
   type: NodePort
   ports:
-    - port: 9090
+    - port: 80
       targetPort: 9090
       nodePort: 30003
       protocol: TCP
   selector:
     app: prometheus
-    component: server

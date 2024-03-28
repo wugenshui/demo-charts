@@ -7,15 +7,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      task: monitoring
-      k8s-app: grafana
+      app: grafana
   template:
     metadata:
       labels:
-        task: monitoring
-        k8s-app: grafana
+        app: grafana
     spec:
-      nodeName: k8s-master # 部署到那个节点
+      nodeName: k8s-master # 指定部署节点
       containers:
       - name: grafana
         image: grafana/grafana:10.1.6
@@ -61,13 +59,13 @@ metadata:
   labels:
     kubernetes.io/cluster-service: 'true'
     kubernetes.io/name: monitoring-grafana
-  name: grafana-svc
+  name: grafana
   namespace: monitor
 spec:
   ports:
-  - port: 80
-    targetPort: 3000
-    nodePort: 30004
+  - port: 80 # 服务暴露端口
+    targetPort: 3000 # 对应pod端口
+    nodePort: 30004 # nodeport暴露端口
   selector:
-    k8s-app: grafana
+    app: grafana
   type: NodePort
