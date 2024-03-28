@@ -83,11 +83,11 @@ data:
       - source_labels: [__meta_kubernetes_service_name]
         action: replace
         target_label: kubernetes_name
-      - job_name: "k8s"
-        # metrics_path defaults to '/metrics'
-        # scheme defaults to 'http'.
-        static_configs:
-          - targets: ["k8s-master:9100"]
+    - job_name: "k8s"
+      # metrics_path defaults to '/metrics'
+      # scheme defaults to 'http'.
+      static_configs:
+        - targets: ["k8s-master:9100"]
 ---
 apiVersion: apps/v1
 kind: Deployment
