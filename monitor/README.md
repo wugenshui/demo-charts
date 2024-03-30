@@ -20,3 +20,10 @@ kubectl delete -f node-export.yaml
 
 # 默认账户密码
 admin admin -> 123456
+
+# prometheus 中 kubernetes-service-endpoints 服务自动抓取配置
+```yaml
+metadata:
+  annotations:
+    prometheus.io/scrape: 'true'
+```
