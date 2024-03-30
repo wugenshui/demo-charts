@@ -62,7 +62,7 @@
       }
     ]
   },
-  "description": "Dashboard for Micrometer instrumented applications (Java, Spring Boot, Micronaut)",
+  "description": "id=4701 JVM (Micrometer)",
   "editable": true,
   "gnetId": 4701,
   "graphTooltip": 1,
@@ -2969,6 +2969,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "JVM (Micrometer)",
+  "title": "Java服务监控",
   "version": 33
 }

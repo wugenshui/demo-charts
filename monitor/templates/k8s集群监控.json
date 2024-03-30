@@ -37,7 +37,7 @@
   ],
   "id": null,
   "title": "K8S集群监控",
-  "description": "id=315",
+  "description": "id=315 kubernetes-cluster-monitoring-via-prometheus",
   "tags": [
     "kubernetes"
   ],
