@@ -1212,7 +1212,7 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(instance)",
+        "definition": "label_values(ai_request_time_seconds_count{application=\"sskqa-data-analyse\"},instance)",
         "hide": 0,
         "includeAll": true,
         "label": "服务地址",
@@ -1220,7 +1220,7 @@
         "name": "instance",
         "options": [],
         "query": {
-          "query": "label_values(instance)",
+          "query": "label_values(ai_request_time_seconds_count{application=\"sskqa-data-analyse\"},instance)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -1239,6 +1239,6 @@
   "timezone": "",
   "title": "中台服务监控",
   "uid": "bc3b36ad-e464-46b6-9d7f-e30282b145f8",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }
