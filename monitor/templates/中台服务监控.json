@@ -125,11 +125,13 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
+          "exemplar": false,
           "expr": "process_uptime_seconds{instance=~\"$instance\"}",
+          "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "{{instance}}",
           "range": true,
           "refId": "A",
           "useBackend": false
@@ -189,7 +191,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum(ai_request_count_total)",
+          "expr": "sum(ai_request_count_total{instance=~\"$instance\"})",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -287,7 +289,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "round(sum(rate(ai_request_count_total{aiType=~\"$aiType\"}[2m])))",
+          "expr": "round(sum(rate(ai_request_count_total{aiType=~\"$aiType\",instance=~\"$instance\"}[2m])))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -384,9 +386,9 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(ai_request_count_total{aiSuccess=\"1\", aiType=~\"$aiType\"})",
+          "expr": "sum(ai_request_count_total{aiSuccess=\"1\", instance=~\"$instance\", aiType=~\"$aiType\"})",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -402,7 +404,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum(ai_request_count_total{aiSuccess=\"0\", aiType=~\"$aiType\"})",
+          "expr": "sum(ai_request_count_total{aiSuccess=\"0\", instance=~\"$instance\", aiType=~\"$aiType\"})",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -501,7 +503,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum(ai_request_count_total{aiType=~\"$aiType\"} ) by (aiType)",
+          "expr": "sum(ai_request_count_total{aiType=~\"$aiType\", instance=~\"$instance\"} ) by (aiType)",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -599,7 +601,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum by (aiType)(ai_request_time_seconds_sum{aiType=~\"$aiType\"} / ai_request_time_seconds_count / 2 )",
+          "expr": "sum by (aiType)(ai_request_time_seconds_sum{aiType=~\"$aiType\", instance=~\"$instance\"} / ai_request_time_seconds_count / 2 )",
           "fullMetaSearch": false,
           "includeNullMetadata": false,
           "instant": false,
@@ -697,7 +699,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum by (aiType) (ai_request_time_seconds_max{aiType=~\"$aiType\"})",
+          "expr": "sum by (aiType) (ai_request_time_seconds_max{aiType=~\"$aiType\", instance=~\"$instance\"})",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -756,7 +758,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -793,8 +796,8 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "ai_request_count_total{aiSuccess=\"1\", aiType=~\"$aiType\"}",
+          "editorMode": "code",
+          "expr": "sum(ai_request_count_total{aiSuccess=\"1\", aiType=~\"$aiType\", instance=~\"$instance\"}) by (aiType)",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -809,8 +812,8 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "ai_request_count_total{aiSuccess=\"0\", aiType=~\"$aiType\"}",
+          "editorMode": "code",
+          "expr": "sum(ai_request_count_total{aiSuccess=\"0\", aiType=~\"$aiType\", instance=~\"$instance\"}) by (aiType)",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -888,7 +891,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "ai_request_count_total{aiSuccess=\"1\", aiType=~\"$aiType\"}",
+          "expr": "sum(ai_request_count_total{aiSuccess=\"1\", aiType=~\"$aiType\", instance=~\"$instance\"}) by (aiType)",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -964,8 +967,8 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "ai_request_count_total{aiSuccess=\"0\", aiType=~\"$aiType\"}",
+          "editorMode": "code",
+          "expr": "sum(ai_request_count_total{aiSuccess=\"0\", aiType=~\"$aiType\", instance=~\"$instance\"}) by (aiType)",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -993,7 +996,8 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           }
@@ -1028,7 +1032,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "round(sum(increase(ai_request_count_total[1d])))",
+          "expr": "round(sum(increase(ai_request_count_total{instance=~\"$instance\"}[1d])))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -1056,7 +1060,8 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           }
@@ -1091,7 +1096,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum(increase(ai_request_count_total[1h]))",
+          "expr": "sum(increase(ai_request_count_total{instance=~\"$instance\"}[1h]))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -1120,7 +1125,8 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           }
@@ -1155,7 +1161,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "round(sum(increase(ai_request_count_total[2m])) / 2)",
+          "expr": "round(sum(increase(ai_request_count_total{instance=~\"$instance\"}[2m])) / 2)",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -1233,6 +1239,6 @@
   "timezone": "",
   "title": "中台服务监控",
   "uid": "bc3b36ad-e464-46b6-9d7f-e30282b145f8",
-  "version": 1,
+  "version": 4,
   "weekStart": ""
 }
