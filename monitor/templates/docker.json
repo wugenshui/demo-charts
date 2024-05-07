@@ -654,10 +654,12 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "irate(container_network_receive_bytes_total{image!=\"\"}[5m])",
+          "editorMode": "code",
+          "expr": "irate(container_network_receive_bytes_total{image!=\"\"}[2m])",
           "intervalFactor": 2,
           "legendFormat": "{{name}}",
           "metric": "container_network_receive_bytes_total",
+          "range": true,
           "refId": "A",
           "step": 20
         }
@@ -751,9 +753,11 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "irate(container_network_transmit_bytes_total{image!=\"\"}[5m])",
+          "editorMode": "code",
+          "expr": "irate(container_network_transmit_bytes_total{image!=\"\"}[2m])",
           "intervalFactor": 2,
           "legendFormat": "{{name}}",
+          "range": true,
           "refId": "A",
           "step": 20
         }
@@ -848,7 +852,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "irate(container_fs_reads_bytes_total{image!=\"\"}[5m])",
+          "expr": "irate(container_fs_reads_bytes_total{image!=\"\"}[2m])",
           "intervalFactor": 2,
           "legendFormat": "{{name}}",
           "metric": "container_network_receive_bytes_total",
@@ -947,7 +951,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "irate(container_fs_writes_bytes_total{image!=\"\"}[5m])",
+          "expr": "irate(container_fs_writes_bytes_total{image!=\"\"}[2m])",
           "intervalFactor": 2,
           "legendFormat": "{{name}}",
           "metric": "container_network_receive_bytes_total",
@@ -999,8 +1003,8 @@
     ]
   },
   "timezone": "browser",
-  "title": "Docker Monitoring",
+  "title": "docker",
   "uid": "e1729e40-a16f-42ff-bdd4-1134e402d74a",
-  "version": 5,
+  "version": 7,
   "weekStart": ""
 }
