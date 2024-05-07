@@ -852,7 +852,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "irate(container_fs_reads_bytes_total{image!=\"\"}[2m])",
+          "expr": "sum by (name)(irate(container_fs_reads_bytes_total{image!=\"\"}[2m]))",
           "intervalFactor": 2,
           "legendFormat": "{{name}}",
           "metric": "container_network_receive_bytes_total",
@@ -951,7 +951,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "irate(container_fs_writes_bytes_total{image!=\"\"}[2m])",
+          "expr": "sum by (name)(irate(container_fs_writes_bytes_total{image!=\"\"}[2m]))",
           "intervalFactor": 2,
           "legendFormat": "{{name}}",
           "metric": "container_network_receive_bytes_total",
@@ -1005,6 +1005,6 @@
   "timezone": "browser",
   "title": "docker",
   "uid": "e1729e40-a16f-42ff-bdd4-1134e402d74a",
-  "version": 7,
+  "version": 8,
   "weekStart": ""
 }
