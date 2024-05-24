@@ -13,6 +13,7 @@ kubectl apply -f prometheus.yaml
 kubectl apply -f grafana.yaml
 kubectl apply -f node-export.yaml
 
+# 异常情况先删除，再重建，一般不需要执行
 kubectl delete -f prometheus.yaml
 kubectl delete -f grafana.yaml
 kubectl delete -f node-export.yaml
