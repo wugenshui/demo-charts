@@ -136,7 +136,7 @@ spec:
         - mountPath: /prometheus/
           name: prometheus-storage-volume
       volumes:                           
-        - name: prometheus-config          # 将prometheus-config做成卷
+        - name: prometheus-config
           configMap:
             name: prometheus-config
         - name: prometheus-storage-volume 
