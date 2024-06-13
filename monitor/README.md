@@ -35,8 +35,6 @@ metadata:
 ## k8s
 - docker.json
 - k8s集群监控.json
-- 服务器监控.json
 
 ## 普通服务器
 - docker.json
-- 服务器监控.json
