@@ -974,7 +974,7 @@
     "list": []
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-2h",
     "to": "now"
   },
   "timepicker": {
@@ -994,6 +994,7 @@
       "5m",
       "15m",
       "1h",
+      "2h",
       "6h",
       "12h",
       "24h",
@@ -1005,6 +1006,6 @@
   "timezone": "browser",
   "title": "docker",
   "uid": "e1729e40-a16f-42ff-bdd4-1134e402d74a",
-  "version": 8,
+  "version": 2,
   "weekStart": ""
 }
