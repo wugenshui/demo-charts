@@ -529,6 +529,208 @@
           },
           "custom": {
             "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 1,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 3
+      },
+      "id": 165,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "increase(http_server_requests_seconds_sum{exception!=\"None\",instance=~\"$instance\"}[24h])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "legendFormat": "{{exception}}：{{uri}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "24Hours Error Request Count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 11
+      },
+      "id": 159,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "avg by (uri) (sum by (uri, instance)(http_server_requests_seconds_sum{instance=~\"$instance\"} / http_server_requests_seconds_count))",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Response Time",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
@@ -583,9 +785,9 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 3
+        "y": 11
       },
-      "id": 159,
+      "id": 166,
       "options": {
         "legend": {
           "calcs": [],
@@ -605,14 +807,14 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "avg by (uri) (sum by (uri, instance)(http_server_requests_seconds_sum{instance=~\"$instance\"} / http_server_requests_seconds_count))",
+          "expr": "http_server_requests_seconds_max",
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "{{uri}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Response Time",
+      "title": "Response Max Time",
       "type": "timeseries"
     },
     {
@@ -625,7 +827,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 11
+        "y": 19
       },
       "id": 140,
       "panels": [],
@@ -656,7 +858,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 12
+        "y": 20
       },
       "hiddenSeries": false,
       "id": 111,
@@ -747,7 +949,7 @@
         "h": 7,
         "w": 6,
         "x": 6,
-        "y": 12
+        "y": 20
       },
       "hiddenSeries": false,
       "id": 112,
@@ -835,7 +1037,7 @@
         "h": 7,
         "w": 6,
         "x": 12,
-        "y": 12
+        "y": 20
       },
       "hiddenSeries": false,
       "id": 113,
@@ -937,7 +1139,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 12
+        "y": 20
       },
       "hiddenSeries": false,
       "id": 119,
@@ -1082,7 +1284,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 19
+        "y": 27
       },
       "id": 141,
       "panels": [],
@@ -1119,7 +1321,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 20
+        "y": 28
       },
       "hiddenSeries": false,
       "id": 24,
@@ -1246,7 +1448,7 @@
         "h": 7,
         "w": 6,
         "x": 6,
-        "y": 20
+        "y": 28
       },
       "hiddenSeries": false,
       "id": 25,
@@ -1374,7 +1576,7 @@
         "h": 7,
         "w": 6,
         "x": 12,
-        "y": 20
+        "y": 28
       },
       "hiddenSeries": false,
       "id": 26,
@@ -1503,7 +1705,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 20
+        "y": 28
       },
       "hiddenSeries": false,
       "id": 86,
@@ -1630,7 +1832,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 27
+        "y": 35
       },
       "id": 142,
       "panels": [],
@@ -1667,7 +1869,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 28
+        "y": 36
       },
       "hiddenSeries": false,
       "id": 106,
@@ -1798,7 +2000,7 @@
         "h": 7,
         "w": 6,
         "x": 6,
-        "y": 28
+        "y": 36
       },
       "hiddenSeries": false,
       "id": 93,
@@ -1914,7 +2116,7 @@
         "h": 7,
         "w": 6,
         "x": 12,
-        "y": 28
+        "y": 36
       },
       "hiddenSeries": false,
       "id": 32,
@@ -2057,7 +2259,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 28
+        "y": 36
       },
       "hiddenSeries": false,
       "id": 124,
@@ -2147,7 +2349,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 35
+        "y": 43
       },
       "hiddenSeries": false,
       "id": 138,
@@ -2249,7 +2451,7 @@
         "h": 7,
         "w": 12,
         "x": 6,
-        "y": 35
+        "y": 43
       },
       "height": "",
       "hiddenSeries": false,
@@ -2368,7 +2570,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 35
+        "y": 43
       },
       "hiddenSeries": false,
       "id": 61,
@@ -2476,7 +2678,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 42
+        "y": 50
       },
       "id": 143,
       "panels": [],
@@ -2514,7 +2716,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 43
+        "y": 51
       },
       "hiddenSeries": false,
       "id": 3,
@@ -2642,7 +2844,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 50
+        "y": 58
       },
       "id": 144,
       "panels": [],
@@ -2679,7 +2881,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 51
+        "y": 59
       },
       "hiddenSeries": false,
       "id": 78,
@@ -2807,7 +3009,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 58
+        "y": 66
       },
       "id": 145,
       "panels": [],
@@ -2838,7 +3040,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 59
+        "y": 67
       },
       "hiddenSeries": false,
       "id": 98,
@@ -2928,7 +3130,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 59
+        "y": 67
       },
       "hiddenSeries": false,
       "id": 101,
@@ -3032,7 +3234,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 59
+        "y": 67
       },
       "hiddenSeries": false,
       "id": 99,
@@ -3128,7 +3330,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 66
+        "y": 74
       },
       "id": 146,
       "panels": [],
@@ -3165,7 +3367,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 67
+        "y": 75
       },
       "hiddenSeries": false,
       "id": 37,
@@ -3268,7 +3470,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 67
+        "y": 75
       },
       "hiddenSeries": false,
       "id": 38,
@@ -3362,7 +3564,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 74
+        "y": 82
       },
       "id": 147,
       "panels": [],
@@ -3393,7 +3595,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 75
+        "y": 83
       },
       "hiddenSeries": false,
       "id": 131,
@@ -3669,6 +3871,6 @@
   "timezone": "browser",
   "title": "Java服务监控",
   "uid": "f223f26c-c0e2-417b-b9b8-5f504f973aa8",
-  "version": 5,
+  "version": 2,
   "weekStart": ""
 }
