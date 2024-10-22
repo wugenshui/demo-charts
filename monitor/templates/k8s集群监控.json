@@ -1392,7 +1392,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1438,7 +1439,7 @@
               "hide": false,
               "interval": "10s",
               "intervalFactor": 1,
-              "legendFormat": "k8s：{{ pod }} | {{ kubernetes_io_hostname }}",
+              "legendFormat": "{{ pod }} | {{ kubernetes_io_hostname }} [k8s]",
               "metric": "container_cpu",
               "range": true,
               "refId": "A",
@@ -1454,7 +1455,7 @@
               "hide": false,
               "interval": "10s",
               "intervalFactor": 1,
-              "legendFormat": "docker: {{ name }} | {{ kubernetes_io_hostname }}",
+              "legendFormat": "{{ name }} | {{ kubernetes_io_hostname }} [docker]",
               "metric": "container_cpu",
               "range": true,
               "refId": "B",
@@ -1465,11 +1466,13 @@
                 "type": "prometheus",
                 "uid": "${DS_PROMETHEUS}"
               },
+              "editorMode": "code",
               "expr": "sum (rate (container_cpu_usage_seconds_total{rkt_container_name!=\"\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (kubernetes_io_hostname, rkt_container_name)",
               "interval": "10s",
               "intervalFactor": 1,
-              "legendFormat": "rkt: {{ kubernetes_io_hostname }} | {{ rkt_container_name }}",
+              "legendFormat": "{{ kubernetes_io_hostname }} | {{ rkt_container_name }} [rtk]",
               "metric": "container_cpu",
+              "range": true,
               "refId": "C",
               "step": 10
             }
@@ -1523,7 +1526,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1566,7 +1570,7 @@
               "expr": "sum (container_memory_working_set_bytes{pod!=\"\",name=~\"^k8s_.*\",container_name!=\"POD\",kubernetes_io_hostname=~\"^$Node$\"}) by (pod, kubernetes_io_hostname)",
               "interval": "10s",
               "intervalFactor": 1,
-              "legendFormat": "k8s：{{ pod}} | {{ kubernetes_io_hostname}}",
+              "legendFormat": "{{ pod}} | {{ kubernetes_io_hostname}} [k8s]",
               "metric": "container_memory_usage:sort_desc",
               "range": true,
               "refId": "A",
@@ -1581,7 +1585,7 @@
               "expr": "sum (container_memory_working_set_bytes{image!=\"\",name!~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\"}) by (kubernetes_io_hostname, name, image)",
               "interval": "10s",
               "intervalFactor": 1,
-              "legendFormat": "docker：{{ name  }} | {{ kubernetes_io_hostname }}",
+              "legendFormat": "{{ name  }} | {{ kubernetes_io_hostname }} [docker]",
               "metric": "container_memory_usage:sort_desc",
               "range": true,
               "refId": "B",
@@ -1592,11 +1596,13 @@
                 "type": "prometheus",
                 "uid": "${DS_PROMETHEUS}"
               },
+              "editorMode": "code",
               "expr": "sum (container_memory_working_set_bytes{rkt_container_name!=\"\",kubernetes_io_hostname=~\"^$Node$\"}) by (kubernetes_io_hostname, rkt_container_name)",
               "interval": "10s",
               "intervalFactor": 1,
-              "legendFormat": "rkt: {{ kubernetes_io_hostname }} | {{ rkt_container_name }}",
+              "legendFormat": "{{ kubernetes_io_hostname }} | {{ rkt_container_name }} [rtk]",
               "metric": "container_memory_usage:sort_desc",
+              "range": true,
               "refId": "C",
               "step": 10
             }
@@ -1650,7 +1656,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1694,7 +1701,7 @@
               "hide": false,
               "interval": "10s",
               "intervalFactor": 1,
-              "legendFormat": "接收 k8s：{{ pod }} | {{ kubernetes_io_hostname }}",
+              "legendFormat": "接收：{{ pod }} | {{ kubernetes_io_hostname }} [k8s]",
               "metric": "network",
               "range": true,
               "refId": "B",
@@ -1710,7 +1717,7 @@
               "hide": false,
               "interval": "10s",
               "intervalFactor": 1,
-              "legendFormat": "发送 k8s：{{ pod }} | {{ kubernetes_io_hostname }}",
+              "legendFormat": "发送：{{ pod }} | {{ kubernetes_io_hostname }} [k8s]",
               "metric": "network",
               "range": true,
               "refId": "D",
@@ -1726,7 +1733,7 @@
               "hide": false,
               "interval": "10s",
               "intervalFactor": 1,
-              "legendFormat": "接收 docker：{{ name }} | {{ kubernetes_io_hostname }}",
+              "legendFormat": "接收：{{ name }} | {{ kubernetes_io_hostname }} [docker]",
               "metric": "network",
               "range": true,
               "refId": "A",
@@ -1742,7 +1749,7 @@
               "hide": false,
               "interval": "10s",
               "intervalFactor": 1,
-              "legendFormat": "发送 docker：{{ name }} | {{ kubernetes_io_hostname }}",
+              "legendFormat": "发送：{{ name }} | {{ kubernetes_io_hostname }} [docker]",
               "metric": "network",
               "range": true,
               "refId": "C",
@@ -1753,12 +1760,14 @@
                 "type": "prometheus",
                 "uid": "${DS_PROMETHEUS}"
               },
+              "editorMode": "code",
               "expr": "sum (rate (container_network_transmit_bytes_total{rkt_container_name!=\"\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (kubernetes_io_hostname, rkt_container_name)",
               "hide": false,
               "interval": "10s",
               "intervalFactor": 1,
-              "legendFormat": "-> rkt: {{ kubernetes_io_hostname }} | {{ rkt_container_name }}",
+              "legendFormat": "接收: {{ kubernetes_io_hostname }} | {{ rkt_container_name }} [rtk]",
               "metric": "network",
+              "range": true,
               "refId": "E",
               "step": 10
             },
@@ -1767,12 +1776,14 @@
                 "type": "prometheus",
                 "uid": "${DS_PROMETHEUS}"
               },
+              "editorMode": "code",
               "expr": "- sum (rate (container_network_transmit_bytes_total{rkt_container_name!=\"\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (kubernetes_io_hostname, rkt_container_name)",
               "hide": false,
               "interval": "10s",
               "intervalFactor": 1,
-              "legendFormat": "<- rkt: {{ kubernetes_io_hostname }} | {{ rkt_container_name }}",
+              "legendFormat": "发送: {{ kubernetes_io_hostname }} | {{ rkt_container_name }} [rtk]",
               "metric": "network",
+              "range": true,
               "refId": "F",
               "step": 10
             }
@@ -1826,7 +1837,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1870,7 +1882,7 @@
               "hide": false,
               "interval": "10s",
               "intervalFactor": 1,
-              "legendFormat": "读 k8s：{{ pod }} | {{ kubernetes_io_hostname }}",
+              "legendFormat": "读：{{ pod }} | {{ kubernetes_io_hostname }} [k8s]",
               "metric": "network",
               "range": true,
               "refId": "B",
@@ -1886,7 +1898,7 @@
               "hide": false,
               "interval": "10s",
               "intervalFactor": 1,
-              "legendFormat": "写 k8s：{{ pod }} | {{ kubernetes_io_hostname }}",
+              "legendFormat": "写：{{ pod }} | {{ kubernetes_io_hostname }} [k8s]",
               "metric": "network",
               "range": true,
               "refId": "D",
@@ -1902,7 +1914,7 @@
               "hide": false,
               "interval": "10s",
               "intervalFactor": 1,
-              "legendFormat": "读 docker：{{ name }} | {{ kubernetes_io_hostname }}",
+              "legendFormat": "读：{{ name }} | {{ kubernetes_io_hostname }} [docker]",
               "metric": "network",
               "range": true,
               "refId": "A",
@@ -1918,7 +1930,7 @@
               "hide": false,
               "interval": "10s",
               "intervalFactor": 1,
-              "legendFormat": "写 docker：{{ name }} | {{ kubernetes_io_hostname }}",
+              "legendFormat": "写：{{ name }} | {{ kubernetes_io_hostname }} [docker]",
               "metric": "network",
               "range": true,
               "refId": "C",
@@ -1934,7 +1946,7 @@
               "hide": false,
               "interval": "10s",
               "intervalFactor": 1,
-              "legendFormat": "-> rkt: {{ kubernetes_io_hostname }} | {{ rkt_container_name }}",
+              "legendFormat": "读: {{ kubernetes_io_hostname }} | {{ rkt_container_name }} [rtk]",
               "metric": "network",
               "range": true,
               "refId": "E",
@@ -1945,17 +1957,19 @@
                 "type": "prometheus",
                 "uid": "${DS_PROMETHEUS}"
               },
+              "editorMode": "code",
               "expr": "- sum (rate (container_network_transmit_bytes_total{rkt_container_name!=\"\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (kubernetes_io_hostname, rkt_container_name)",
               "hide": false,
               "interval": "10s",
               "intervalFactor": 1,
-              "legendFormat": "<- rkt: {{ kubernetes_io_hostname }} | {{ rkt_container_name }}",
+              "legendFormat": "写: {{ kubernetes_io_hostname }} | {{ rkt_container_name }} [rtk]",
               "metric": "network",
+              "range": true,
               "refId": "F",
               "step": 10
             }
           ],
-          "title": "容器网络I/O使用情况",
+          "title": "容器磁盘I/O使用情况",
           "type": "timeseries"
         }
       ],
@@ -2035,6 +2049,6 @@
   "timezone": "browser",
   "title": "K8S集群监控",
   "uid": "b1dbca48-026e-41a2-947f-c67ced132dbe",
-  "version": 12,
+  "version": 2,
   "weekStart": ""
 }
