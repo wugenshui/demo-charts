@@ -38,12 +38,16 @@ data:
       index.number_of_shards: 1
     setup.template.name: "filebeat"
     setup.template.pattern: "filebeat-*"
+    setup.template.overwrite: true
+    setup.template.append_fields:
+    - name: json.log
+      type: text
     # 关闭ilm
     setup.ilm.enabled: false
     #-------------------------- Elasticsearch output -------------------------------
     output.elasticsearch:
       # 需要修改ES的配置
-      hosts: ["http://192.168.0.80:30006"]
+      hosts: ["http://192.168.0.110:30006"]
       index: "filebeat-%{+yyyy.MM.dd}"
     processors:
       - add_docker_metadata: ~

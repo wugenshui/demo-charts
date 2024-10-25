@@ -2,7 +2,7 @@
 
 ## 安装前执行
 ```bash
-docker pull docker.elastic.co/beats/filebeat:8.12.2
+docker pull elastic/filebeat:7.17.4
 docker pull docker.elastic.co/elasticsearch/elasticsearch:8.12.2
 docker pull docker.elastic.co/kibana/kibana:8.12.2
 
@@ -15,6 +15,7 @@ mkdir -p /data/filebeat/data
 chmod 777 /data/es/data
 chmod 777 /data/es/plugins
 chmod 777 /data/filebeat/data
+mkdir -p /opt/efk
 
 # ES需求
 # 修改配置文件增加配置

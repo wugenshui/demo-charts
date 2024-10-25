@@ -8,7 +8,7 @@ data:
   kibana.yml: |-
     server.name: kibana
     server.host: 0.0.0.0
-    server.publicBaseUrl: http://192.168.0.80:30006
+    server.publicBaseUrl: http://192.168.0.110:30006
     elasticsearch.hosts: ["http://es"]
     i18n.locale: "zh-CN"
 ---
