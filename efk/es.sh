@@ -17,7 +17,7 @@ spec:
       nodeName: k8s-master # 指定部署节点
       containers:
       - name: es
-        image: docker.elastic.co/elasticsearch/elasticsearch:8.12.2
+        image: elasticsearch:8.12.2
         # 只有镜像不存在时，才会进行镜像拉取
         imagePullPolicy: IfNotPresent
         env:

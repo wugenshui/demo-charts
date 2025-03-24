@@ -30,7 +30,7 @@ spec:
       nodeName: k8s-master # 指定部署节点
       containers:
       - name: kibana
-        image: docker.elastic.co/kibana/kibana:8.12.2
+        image: kibana:8.12.2
         # 只有镜像不存在时，才会进行镜像拉取
         imagePullPolicy: IfNotPresent
         ports:
