@@ -506,14 +506,14 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "round(sum by (uri)(increase(http_server_requests_seconds_count{instance=~\"$instance\"}[2m])))",
+          "expr": "round(sum by (uri)(increase(http_server_requests_seconds_count{instance=~\"$instance\"}[5m]))) / 5",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Request Count",
+      "title": "每分钟请求数",
       "type": "timeseries"
     },
     {
@@ -562,22 +562,44 @@
             }
           },
           "mappings": [],
-          "min": 1,
+          "min": 0.1,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              },
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "CannotCreateTransactionException：/bill/multiPrint"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
               {
-                "color": "red",
-                "value": 80
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                }
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -606,7 +628,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "increase(http_server_requests_seconds_sum{exception!=\"None\",instance=~\"$instance\"}[24h])",
+          "expr": "sum by (uri)(rate(http_server_requests_seconds_count{exception!=\"None\", instance=~\"$instance\"}[5m])) * 60",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -616,7 +638,7 @@
           "useBackend": false
         }
       ],
-      "title": "24Hours Error Request Count",
+      "title": "每分钟错误请求数",
       "type": "timeseries"
     },
     {
@@ -708,14 +730,14 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "avg by (uri) (sum by (uri, instance)(http_server_requests_seconds_sum{instance=~\"$instance\"} / http_server_requests_seconds_count))",
+          "expr": "sum by (uri) (\r\n  rate(http_server_requests_seconds_sum{instance=~\"$instance\"}[5m])\r\n)\r\n/\r\nsum by (uri) (\r\n  rate(http_server_requests_seconds_count{instance=~\"$instance\"}[5m])\r\n)",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Response Time",
+      "title": "请求平均响应时间",
       "type": "timeseries"
     },
     {
@@ -806,15 +828,19 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "http_server_requests_seconds_max",
+          "expr": "http_server_requests_seconds_max{application=\"$application\"}",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
           "instant": false,
           "legendFormat": "{{uri}}",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         }
       ],
-      "title": "Response Max Time",
+      "title": "请求最大响应时间",
       "type": "timeseries"
     },
     {
@@ -3706,7 +3732,7 @@
       }
     }
   ],
-  "refresh": "1m",
+  "refresh": false,
   "schemaVersion": 38,
   "style": "dark",
   "tags": [],
@@ -3871,6 +3897,6 @@
   "timezone": "browser",
   "title": "Java服务监控",
   "uid": "f223f26c-c0e2-417b-b9b8-5f504f973aa8",
-  "version": 2,
+  "version": 6,
   "weekStart": ""
 }
